@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --negro: #292626;
+  --blanco: #faf9f5;
+  --primary-color: #b52c33;
+  --secundary-color: #9c8e2b;
+  /*[>https://huemint.com/brand-3/#palette=---<]*/
+  /*[> Tipografía <]*/
+  --tipo-principal: 'Noto Serif', serif;
+  --tipo-secundaria: Verdana;
+}
+body {
+  display: flex;
+  font-family: var(--tipo-principal);
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  color: var(--negro);
+  background-color: var(--blanco);
+  min-width: 1200px;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+img {
+  width: 100px;
+}
