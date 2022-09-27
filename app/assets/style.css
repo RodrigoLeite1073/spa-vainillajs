@@ -1,8 +1,9 @@
 body {
   min-width: 1200px;
 }
-a {
-  color: var(--secundary-color);
+.menu a {
+  display: inline;
+  color: var(--blanco);
   transition: color 300ms;
 }
 
@@ -11,6 +12,7 @@ a:hover {
 }
 
 h1 {
+  color: var(--secundary-color);
   font-weight: bold;
   text-align: center;
   font-size: 3em;
@@ -30,4 +32,28 @@ h1 {
   width: 4rem;
   margin: 1rem auto;
   display: block;
+}
+
+.header {
+  padding: 0.5rem;
+  position: sticky;
+  top: 0;
+  text-align: center;
+  background-color: var(--primary-color);
+}
+
+.form-search {
+  margin: auto;
+  text-align: center;
+}
+
+.form-search input {
+  /*display: block;*/
+  background-color: var(--blanco);
+  outline: none;
+  margin: auto;
+  padding: 0.25rem;
+  font-size: 1rem;
+  box-shadow: 0 0 10px var(--secundary-color), inset 0 0 1px #0008;
+  border-radius: 5px;
 }
