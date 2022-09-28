@@ -1,23 +1,28 @@
+:root {
+  --negro: #292626;
+  --blanco: #faf9f5;
+  --primary-color: #b52c33;
+  --secundary-color: #9c8e2b;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   min-width: 1200px;
-}
-.menu a {
-  display: inline;
-  color: var(--blanco);
-  transition: color 300ms;
-}
-
-a:hover {
-  color: var(--primary-color);
 }
 
 h1 {
   color: var(--secundary-color);
   font-weight: bold;
-  text-align: center;
+  /*text-align: center;*/
   font-size: 3em;
 }
-
+h1 a {
+  text-decoration: none;
+  color: inherit;
+}
 .error {
   padding: 1rem;
   font-size: 2rem;
@@ -35,23 +40,39 @@ h1 {
 }
 
 .header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
   padding: 0.5rem;
   position: sticky;
   top: 0;
-  text-align: center;
+  /*text-align: center;*/
   background-color: var(--primary-color);
 }
-
-.form-search {
-  margin: auto;
-  text-align: center;
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40vw;
 }
+.menu a {
+  color: var(--blanco);
+  transition: color 300ms;
+  text-decoration: none;
+}
+.menu a:hover {
+  color: var(--secundary-color);
+}
+/*.form-search {*/
+/*[>margin: auto;<]*/
+/*[>text-align: center;<]*/
+/*}*/
 
 .form-search input {
   /*display: block;*/
   background-color: var(--blanco);
   outline: none;
-  margin: auto;
+  /*margin: auto;*/
   padding: 0.25rem;
   font-size: 1rem;
   box-shadow: 0 0 10px var(--secundary-color), inset 0 0 1px #0008;
