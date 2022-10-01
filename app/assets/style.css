@@ -9,15 +9,17 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  min-width: 1200px;
-}
+/*body {*/
+/*min-width: 1200px;*/
+/*}*/
 
 h1 {
+  text-align: center;
   color: var(--secundary-color);
+  grid-area: title;
   font-weight: bold;
   /*text-align: center;*/
-  font-size: 3em;
+  font-size: 3rem;
 }
 h1 a {
   text-decoration: none;
@@ -40,9 +42,12 @@ h1 a {
 }
 
 .header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template:
+    'title title' 3rem
+    'nav srch' 1.5rem
+    / 50vw 50vw;
+  align-items: end;
   padding: 0.5rem;
   position: sticky;
   top: 0;
@@ -50,31 +55,53 @@ h1 a {
   background-color: var(--primary-color);
 }
 .menu {
+  grid-area: nav;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 40vw;
+  gap: 2rem;
 }
 .menu a {
   color: var(--blanco);
   transition: color 300ms;
   text-decoration: none;
+  justify-self: center;
 }
 .menu a:hover {
   color: var(--secundary-color);
 }
-/*.form-search {*/
-/*[>margin: auto;<]*/
-/*[>text-align: center;<]*/
-/*}*/
+.form-search {
+  grid-area: srch;
+  justify-self: end;
+  margin: 0 1rem;
+}
 
 .form-search input {
   /*display: block;*/
   background-color: var(--blanco);
+  opacity: 0.5;
   outline: none;
   /*margin: auto;*/
   padding: 0.25rem;
   font-size: 1rem;
   box-shadow: 0 0 10px var(--secundary-color), inset 0 0 1px #0008;
   border-radius: 5px;
+}
+
+.grid-fluid {
+  margin: 1rem auto;
+  max-width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.post-card {
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 80%;
+  background-color: var(--secundary-color);
+}
+
+.post-card p {
+  display: flex;
+  justify-content: space-between;
 }
