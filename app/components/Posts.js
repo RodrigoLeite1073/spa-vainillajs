@@ -1,4 +1,4 @@
-export function Post(props) {
+export function Post() {
   const $posts = document.createElement('section');
   $posts.id = 'posts';
   $posts.classList.add('grid-fluid');

@@ -1,11 +1,16 @@
 export function PostCard(props) {
+  let { date, slug, title, _embedded } = props;
+  let dateFormat = new Date(date).toLocaleString(),
+    urlPoster = _embedded['wp:featuredmedia']
+      ? _embedded['wp:featuredmedia'][0].source_url
+      : './app/assets/no-images.png';
   return `
   <article class="post-card">
-    <img src="https://placeimg.com/200/200/any" alt="any">
-    <h2>Titulo del post</h2>
+    <img src=${urlPoster} alt="${title.rendered}">
+    <h2>${title.rendered}</h2>
       <p>
-      <date datetime="">Fecha</date>
-      <a href="#">Ver publicación</a>
+      <date datetime="${dateFormat}">${dateFormat}</date>
+      <a href="#/${slug}">Ver publicación</a>
       </p>
     </article>
     `;
