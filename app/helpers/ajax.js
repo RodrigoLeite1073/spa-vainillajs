@@ -7,11 +7,12 @@ export function ajax(props) {
     .catch((err) => {
       let message = err.statusText || 'Ocurrió un error al acceder a la API';
 
-      document.getElementById('root').innerHTML = `
+      document.getElementById('posts').innerHTML = `
       <div class="error">
         <h2>Error ${err.status}: ${message}</h2>
       </div>
       `;
+      document.querySelector('.loader').style.display = 'none';
       console.error(err);
     });
 }
