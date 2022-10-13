@@ -44,8 +44,8 @@ h1 a {
 .header {
   display: grid;
   grid-template:
-    'title title' 3rem
-    'nav srch' 1.5rem
+    "title title" 3rem
+    "nav srch" 1.5rem
     / 2fr 1fr;
   align-items: end;
   padding: 0.5rem;
@@ -72,13 +72,13 @@ h1 a {
 .menu a:hover {
   color: var(--secundary-color);
 }
-.form-search {
+.search-form {
   grid-area: srch;
   justify-self: end;
   margin: 0 1rem;
 }
 
-.form-search input {
+.search-form input {
   width: 100%;
   /*display: block;*/
   background-color: var(--blanco);
