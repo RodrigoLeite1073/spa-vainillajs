@@ -28,11 +28,12 @@ export async function Router() {
       regex = /idPost=(\d*)/,
       idPost = urlString.match(regex)[1];
 
-    //const params = new URLSearchParams(querryString);
-    //id = params.get("id");
-    //console.log(`params ${params}`);
-
-    $main.innerHTML = `<h2>Post Seleccionado</h2> url ${idPost}  `;
+    await ajax({
+      url: `${api.POST}/${idPost}`,
+      cbSuccess: (post) => {
+        $main.innerHTML = Post(post);
+      },
+    });
   }
   d.querySelector(".loader").style.display = "none";
 }

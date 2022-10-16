@@ -25,6 +25,12 @@ h1 a {
   text-decoration: none;
   color: inherit;
 }
+
+img {
+  width: 100%;
+  height: auto;
+}
+
 .error {
   padding: 1rem;
   font-size: 2rem;
@@ -117,4 +123,42 @@ h1 a {
 .post-card a {
   text-decoration: none;
   color: var(--blanco);
+}
+
+.post-page {
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 80%;
+  background-color: var(--secundary-color);
+}
+
+.post-page > aside {
+  margin: auto;
+  width: 80%;
+  text-align: center;
+}
+
+.post-page > hr {
+  border: thin solid var(--primary-color);
+  margin: 2rem auto;
+  width: 90%;
+}
+
+.post-page > time {
+  margin: 1rem auto;
+  display: block;
+}
+
+.post-page > article {
+  padding: 0 2rem;
+}
+
+.post-page img,
+.post-page figure,
+.post-page audio,
+.post-page iframe,
+.post-page video {
+  margin: auto;
+  display: block;
+  max-width: 100%;
 }
