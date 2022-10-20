@@ -3,6 +3,12 @@ import api from "../helpers/wp_api.js";
 import { Post } from "./Post.js";
 import { PostCard } from "./PostCard.js";
 
+const searchParams = (regex) => {
+  const urlString = window.location.hash,
+    results = urlString.match(regex)[2];
+  return results;
+};
+
 export async function Router() {
   const d = document,
     w = window;
@@ -20,13 +26,12 @@ export async function Router() {
       },
     });
   } else if (hash.includes("#/search")) {
-    $main.innerHTML = "<h2>Search</h2>";
+    const param = searchParams(/(search=)(\w+(%20*\w*)*)/);
+    $main.innerHTML = `<h2>${param}</h2>`;
   } else if (hash === "#/contact") {
     $main.innerHTML = "<h2>Contacto</h2>";
   } else {
-    const urlString = window.location.href,
-      regex = /idPost=(\d*)/,
-      idPost = urlString.match(regex)[1];
+    const idPost = searchParams(/(idPost=)(\d*)/);
 
     await ajax({
       url: `${api.POST}/${idPost}`,
