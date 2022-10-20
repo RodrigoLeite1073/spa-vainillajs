@@ -5,8 +5,9 @@ import { PostCard } from "./PostCard.js";
 
 const searchParams = (regex) => {
   const urlString = window.location.hash,
-    results = urlString.match(regex)[2];
-  return results;
+    results = urlString.match(/(\w+=)(\w+((%20){0,1}\w+)*)/)[2];
+  let result = results.replaceAll("%20", " ");
+  return result;
 };
 
 export async function Router() {
@@ -26,12 +27,12 @@ export async function Router() {
       },
     });
   } else if (hash.includes("#/search")) {
-    const param = searchParams(/(search=)(\w+(%20*\w*)*)/);
+    const param = searchParams();
     $main.innerHTML = `<h2>${param}</h2>`;
   } else if (hash === "#/contact") {
     $main.innerHTML = "<h2>Contacto</h2>";
   } else {
-    const idPost = searchParams(/(idPost=)(\d*)/);
+    const idPost = searchParams();
 
     await ajax({
       url: `${api.POST}/${idPost}`,
