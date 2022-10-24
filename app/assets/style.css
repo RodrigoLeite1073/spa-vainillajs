@@ -41,6 +41,14 @@ img {
   background-color: var(--primary-color);
 }
 
+.error mark {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+  color: var(--blanco);
+  background-color: var(--secundary-color);
+}
+
 .loader {
   width: 4rem;
   margin: 1rem auto;

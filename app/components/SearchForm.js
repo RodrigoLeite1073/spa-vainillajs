@@ -7,11 +7,11 @@ export function SearchForm() {
   $input.name = "search";
   $input.type = "search";
   $input.placeholder = "Buscar...";
+  $input.autocomplete = "off";
 
   d.addEventListener("submit", (e) => {
     if (!e.target.matches(".search-form")) return false;
     e.preventDefault();
-    //localStorage.setItem("wpSearch", e.target.search.value);
     location.hash = `#/search?search=${$input.value}`;
   });
   return $searchForm;
