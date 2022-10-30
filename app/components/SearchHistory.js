@@ -9,6 +9,7 @@ export function SearchHistory(history) {
   return `
   <h3>Busquedas Anteriores</h3>
   <select id="history" name="history">
+    <option>Seleccione una busqueda</option>
     ${html}
   </select>
   `;

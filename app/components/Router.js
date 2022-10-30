@@ -1,19 +1,10 @@
 import { ajax } from "../helpers/ajax.js";
+import { searchParams } from "../helpers/SearchParams.js";
 import api from "../helpers/wp_api.js";
 import { Post } from "./Post.js";
 import { PostCard } from "./PostCard.js";
 import { SearchCard } from "./SearchCard.js";
 import { SearchHistory } from "./SearchHistory.js";
-
-const searchParams = () => {
-  const urlString = window.location.hash,
-    results = urlString.match(/\?(\w+?=)(\w+((%20){0,1}\w+)*)/);
-  if (!results) {
-    return false;
-  }
-  let result = results[2].replaceAll("%20", " ");
-  return result;
-};
 
 export async function Router() {
   const d = document,
@@ -21,7 +12,8 @@ export async function Router() {
 
   let { hash } = location,
     $main = d.getElementById("main"),
-    searchHistory = [];
+    historyString = "{}",
+    historyArray = [];
 
   if (!hash || hash === "#/") {
     await ajax({
@@ -33,17 +25,21 @@ export async function Router() {
       },
     });
   } else if (hash.includes("#/search")) {
-    searchHistory = localStorage.getItem("search");
-    searchHistory = JSON.parse(searchHistory);
-    const param = searchParams();
+    historyString = localStorage.getItem("search");
+    if (historyString) historyArray = JSON.parse(historyString);
+
+    const param = searchParams("search");
     if (param) {
-      console.log(location.hash);
-      d.querySelector(".search-form input").value = param;
+      d.querySelector(".search-form input").value = param.replaceAll(
+        "%20",
+        " "
+      );
       await ajax({
         url: `${api.SEARCH}${param}`,
         cbSuccess: (posts) => {
-          if (!searchHistory.includes(param)) searchHistory.push(param);
-          localStorage.setItem("search", JSON.stringify(searchHistory));
+          if (!historyArray.includes(param))
+            historyArray.push(param.replaceAll("%20", " "));
+          localStorage.setItem("search", JSON.stringify(historyArray));
           let html = ``;
           if (posts.length < 1) {
             $main.innerHTML = `
@@ -58,7 +54,7 @@ export async function Router() {
         },
       });
     } else {
-      const $select = SearchHistory(searchHistory);
+      const $select = SearchHistory(historyArray);
       $main.innerHTML = $select;
       /*$main.innerHTML = `
       <div class="error">
@@ -69,14 +65,15 @@ export async function Router() {
   } else if (hash === "#/contact") {
     $main.innerHTML = "<h2>Contacto</h2>";
   } else {
-    const idPost = searchParams();
-
-    await ajax({
-      url: `${api.POST}/${idPost}`,
-      cbSuccess: (post) => {
-        $main.innerHTML = Post(post);
-      },
-    });
+    const idPost = searchParams("idPost");
+    if (idPost) {
+      await ajax({
+        url: `${api.POST}/${idPost}`,
+        cbSuccess: (post) => {
+          $main.innerHTML = Post(post);
+        },
+      });
+    }
   }
   d.querySelector(".loader").style.display = "none";
 }
