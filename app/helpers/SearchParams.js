@@ -1,18 +1,12 @@
 export const searchParams = (param) => {
-  const urlString = location.hash,
-    results = urlString.match(/\w+=.+/);
-
+  //const urlString = location.hash,
+  const urlString = "#/search?search=mujer%20blanca&page=2",
+    re = new RegExp(`${param}=\\w+%?\\w*`, "i"),
+    //results = urlString.match(/\w+=.+/);
+    results = urlString.match(re);
   if (!results) {
     return false;
   }
-  const splitResult = results[0].split("&"),
-    resultObj = {};
-  splitResult.forEach((el) => {
-    let [key, value] = el.split("=");
-    resultObj[key] = value;
-  });
-  if (!param in resultObj) {
-    return false;
-  }
-  return resultObj[param];
+  const [, value] = el.split("=");
+  return value;
 };
