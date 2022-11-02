@@ -48,7 +48,7 @@ export async function Router() {
             </div>
             `;
           } else {
-            posts.forEach((el) => (html += SearchCard(el._embedded.self[0])));
+            posts.forEach((el) => (html += SearchCard(el)));
             $main.innerHTML = html;
           }
         },
@@ -56,11 +56,6 @@ export async function Router() {
     } else {
       const $select = SearchHistory(historyArray);
       $main.innerHTML = $select;
-      /*$main.innerHTML = `
-      <div class="error">
-        <h2>No has escrito nada en el campo de busqueda.</h2>
-        </div>
-        `*/
     }
   } else if (hash === "#/contact") {
     $main.innerHTML = "<h2>Contacto</h2>";

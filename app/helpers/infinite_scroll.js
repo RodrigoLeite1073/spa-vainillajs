@@ -1,7 +1,7 @@
-import { PostCard } from "../components/PostCard";
-import { SearchCard } from "../components/SearchCard";
-import { ajax } from "./ajax";
-import { searchParams } from "./SearchParams";
+import { PostCard } from "../components/PostCard.js";
+import { SearchCard } from "../components/SearchCard.js";
+import { ajax } from "./ajax.js";
+import { searchParams } from "./SearchParams.js";
 import api from "./wp_api.js";
 
 export async function InfiniteScroll() {
@@ -9,33 +9,37 @@ export async function InfiniteScroll() {
     w = window;
 
   let querry = searchParams("search"),
-    apiUrl,
+    apiURL,
     Component;
 
-  w.addEventListener("scroll", (e) => {
+  w.addEventListener("scroll", async () => {
     let { scrollTop, clientHeight, scrollHeight } = d.documentElement,
-      { hash } = w.location;
-
-    if (scrollTop + clientHeight >= scrollHeight) {
-      console.log(scrollTop, clientHeight, scrollHeight);
+      { hash } = location;
+    if (scrollTop + clientHeight >= scrollHeight - 100) {
       api.page++;
 
       if (!hash || hash === "#/") {
-        apiUrl = `${api.POSTS}&page=${api.page}`;
+        apiURL = `${api.POSTS}&page=${api.page}`;
         Component = PostCard;
-      } else if (hash === "#/search") {
-        apiUrl = `${api.SEARCH}${querry}&page=${api.page}`;
+      } else if (hash.includes("#/search") && querry) {
+        console.log(querry);
+        apiURL = `${api.SEARCH}${querry}&page=${api.page}`;
         Component = SearchCard;
-      } else {
-        return false;
-      }
-    }
-  });
+      } else return false;
 
-  await ajax({
-    url: apiUrl,
-    cbSuccess: (posts) => {
-      console.log(posts);
-    },
+      d.querySelector(".loader").style.display = "block";
+
+      await ajax({
+        url: apiURL,
+        cbSuccess: (posts) => {
+          let html = "";
+          posts.forEach((el) => (html += Component(el)));
+
+          d.getElementById("main").insertAdjacentHTML("beforeend", html);
+
+          d.querySelector(".loader").style.display = "none";
+        },
+      });
+    }
   });
 }

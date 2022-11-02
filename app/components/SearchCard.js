@@ -1,6 +1,6 @@
 export function SearchCard(props) {
-  let { date, slug, title, excerpt, id } = props
-  let dateFormat = new Date(date).toLocaleString()
+  let { date, slug, title, excerpt, id } = props._embedded.self[0];
+  let dateFormat = new Date(date).toLocaleString();
   return `
   <article class="post-card">
     <h2>${title.rendered}</h2>
@@ -10,5 +10,5 @@ export function SearchCard(props) {
       <a href="#/${slug}/?idPost=${id}">Ver publicación</a>
       </p>
     </article>
-    `
+    `;
 }
