@@ -1,6 +1,7 @@
 import { ajax } from "../helpers/ajax.js";
 import { searchParams } from "../helpers/SearchParams.js";
 import api from "../helpers/wp_api.js";
+import { ContactForm } from "./ContactForm.js";
 import { Post } from "./Post.js";
 import { PostCard } from "./PostCard.js";
 import { SearchCard } from "./SearchCard.js";
@@ -58,7 +59,7 @@ export async function Router() {
       $main.innerHTML = $select;
     }
   } else if (hash === "#/contact") {
-    $main.innerHTML = "<h2>Contacto</h2>";
+    $main.appendChild(ContactForm());
   } else {
     const idPost = searchParams("idPost");
     if (idPost) {
